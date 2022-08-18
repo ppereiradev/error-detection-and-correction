@@ -22,27 +22,32 @@ Now you have the virtual environment activated.
 
 Execute first the server, so the client will have who connect with. You need to have two terminal windows opened, both need to have the virtual environment activated. Also, you have to pass the name of the algorithm as argument when running the server.py.
 ```bash
-python server.py -a crc
+(error-detection) $ python server.py -a crc
 ```
 or
 ```bash
-python server.py --algorithm hamming
+(error-detection) $ python server.py --algorithm hamming
 ```
 
 Now you can run the client, but in another terminal window. Remember you have to pass the same algorithm that you passed for the server.
 ```bash
-python client.py -a crc
+(error-detection) $ python client.py -a crc
 ```
 or
 ```bash
-python client.py --algorithm hamming
+(error-detection) $ python client.py --algorithm hamming
 ```
 
 The algorithm options are: parity, crc, hamming, reed-solomon. Suppose you want to run the Reed-Solomon algorithm, so you have to run the server and the client, respectively, as follows:
 
+First terminal window
 ```bash
-python server.py --algorithm reed-solomon
-python client.py --algorithm reed-solomon
+(error-detection) $ python server.py --algorithm reed-solomon
+```
+
+Second terminal window
+```bash
+(error-detection) $ python client.py --algorithm reed-solomon
 ```
 
 ## File Description
