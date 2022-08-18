@@ -20,7 +20,7 @@ Now you have the virtual environment activated.
 
 ## Usage
 
-Execute first the server, so the client will have who connect with. You have to pass the name of the algorithm as argument when running the server.py.
+Execute first the server, so the client will have who connect with. You need to have two terminal windows opened, both need to have the virtual environment activated. Also, you have to pass the name of the algorithm as argument when running the server.py.
 ```bash
 python server.py -a crc
 ```
@@ -29,7 +29,7 @@ or
 python server.py --algorithm hamming
 ```
 
-Now you can run the client. Remember you have to pass the same algorithm that you passed for the server.
+Now you can run the client, but in another terminal window. Remember you have to pass the same algorithm that you passed for the server.
 ```bash
 python client.py -a crc
 ```
