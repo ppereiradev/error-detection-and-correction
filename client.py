@@ -41,8 +41,6 @@ if __name__ == '__main__':
     socket_client.connect(('127.0.0.1', port))
 
     client_obj = Client()
-    # Send data to server 'Hello world'
-    ## s.sendall('Hello World')
     input_string = input("Enter data you want to send-> ")
     #s.sendall(input_string)
     data =(''.join(format(ord(x), 'b') for x in input_string))
