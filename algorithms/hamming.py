@@ -1,11 +1,23 @@
-class Singleton(type):
-    _instances = {}
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
+"""
+Approach: The idea is to first find the number of redundant bits which can be 
+found by initializing r with 1 and then incrementing it by 1 each 
+time while 2r is smaller than (m + r + 1) where m is 
+the number of bits in the input message. Follow the below steps to solve the problem:
 
-class Hamming(metaclass=Singleton):
+1. Initialize r by 1 and increment it by 1 until 2r is smaller than m+r+1.
+2. Initialize a vector hammingCode of size r + m which will be the length of the output message.
+3. Initialize all the positions of redundant bits with -1 by 
+   traversing from i = 0 to r – 1 and setting hammingCode [2i – 1] = -1. 
+   Then place the input message bits in all the positions where hammingCode[j]
+   is not -1 in order where 0 <= j < (r + m).
+4. Initialize a variable one_count with 0 to store the number of ones and then traverse from i = 0 to (r + m – 1).
+5. If the current bit i.e., hammingCode[i] is not -1 then find the message 
+   bit containing set bit at log2(i+1)th position by traversing 
+   from j = i+2 to r+m by incrementing one_count by 1 if (j & (1<<x)) is not 0 and hammingCode[j – 1] is 1.
+6. If for index i, one_count is even, set hammingCode[i] = 0 otherwise set hammingCode[i] = 1.
+7. After traversing, print the hammingCode[] vector as the output message.
+"""
+class Hamming():
     def __init__(self):
         self.num_parity_bits = 0
         self.list_parity_bit_positions = []

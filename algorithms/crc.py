@@ -1,11 +1,21 @@
-class Singleton(type):
-    _instances = {}
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
+"""
+# Sender Side (Generation of Encoded Data from Data and Generator Polynomial (or Key)):
 
-class CRC(metaclass=Singleton):
+1. The binary data is first augmented by adding k-1 zeros in the end of the data
+2. Use modulo-2 binary division to divide binary data by the key and store remainder of division.
+3. Append the remainder at the end of the data to form the encoded data and send the same
+
+# Receiver Side (Check if there are errors introduced in transmission):
+Perform modulo-2 division again and if the remainder is 0, then there are no errors. 
+
+Modulo 2 Division:
+The process of modulo-2 binary division is the same as the familiar division process we use for decimal numbers. Just that instead of subtraction, we use XOR here.
+
+1. In each step, a copy of the divisor (or data) is XORed with the k bits of the dividend (or key).
+2. The result of the XOR operation (remainder) is (n-1) bits, which is used for the next step after 1 extra bit is pulled down to make it n bits long.
+3. When there are no bits left to pull down, we have a result. The (n-1)-bit remainder which is appended at the sender side.
+"""
+class CRC():
 
     def xor(self, a, b):
         result = []

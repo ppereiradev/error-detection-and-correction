@@ -1,3 +1,10 @@
+"""
+To compute the parity bit, we have to add all the digits together.
+
+If we have error detection using odd parity, the receiver verify the parity
+of the sum of digits that he or she received. If the result is odd, no error was detected,
+if the parity is even, then an error was detected.
+"""
 class Parity:
     def find_parity(self, data):
         parity = [int(i) for i in list(format(ord(data), 'b'))]
