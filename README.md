@@ -20,13 +20,24 @@ Now you have the virtual environment activated.
 
 ## Usage
 
-Execute first the server, so the client will have who connect with. You need to have two terminal windows opened, both need to have the virtual environment activated. Also, you have to pass the name of the algorithm as argument when running the server.py.
+![img](img/error_algorithm_project.png)
+
+Execute first the server, so the router and client will have who connect with. You need to have three terminal windows opened, and they need to have the virtual environment activated. Also, you have to pass the name of the algorithm as argument when running the server.py.
 ```bash
 (error-detection) $ python server.py -a crc
 ```
 or
 ```bash
 (error-detection) $ python server.py --algorithm hamming
+```
+
+Then you run the router, setting if it will cause errors or not.
+```bash
+(error-detection) $ python router.py -e true
+```
+or
+```bash
+(error-detection) $ python router.py --error false
 ```
 
 Now you can run the client, but in another terminal window. Remember you have to pass the same algorithm that you passed for the server.
@@ -38,7 +49,7 @@ or
 (error-detection) $ python client.py --algorithm hamming
 ```
 
-The algorithm options are: parity, crc, hamming, reed-solomon. Suppose you want to run the Reed-Solomon algorithm, so you have to run the server and the client, respectively, as follows:
+The algorithm options are: parity, crc, hamming, reed-solomon. Suppose you want to run the Reed-Solomon algorithm, so you have to run the server, router and the client, respectively, as follows:
 
 First terminal window
 ```bash
@@ -46,6 +57,11 @@ First terminal window
 ```
 
 Second terminal window
+```bash
+(error-detection) $ python router.py --e false
+```
+
+Third terminal window
 ```bash
 (error-detection) $ python client.py --algorithm reed-solomon
 ```
@@ -60,5 +76,6 @@ Second terminal window
 │   ├── parity.py # Odd Parity Error Detection implementation
 │   └── reed_solomon.py # Reed-Solomon Code implementation
 ├── client.py # Simulating the client side, where it sends a message to the server
+├── router.py # Simulating a router, where errors can be added to the bit chain
 └── server.py # Simulating the server side, where the message is processed and it verifies if the message contains any error
 ```
