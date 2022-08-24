@@ -35,7 +35,7 @@ if __name__ == '__main__':
     socket_client = socket.socket()	
 
     # Define the port on which you want to connect
-    port = 12345
+    port = 12346
 
     # connect to the server on local computer
     socket_client.connect(('127.0.0.1', port))
@@ -43,13 +43,15 @@ if __name__ == '__main__':
     client_obj = Client()
     input_string = input("Enter data you want to send-> ")
     #s.sendall(input_string)
-    data =(''.join(format(ord(x), 'b') for x in input_string))
-    print("Entered data in binary format :",data)
+
+    data = [format(ord(x), 'b') for x in input_string]
+    print("Entered data in binary format :", "".join(data))
     
     if args["algorithm"] == 'parity':
         ans = client_obj.encode_data_parity(data)
+
         print("Encoded data to be sent to server in binary format :", ans)
-        socket_client.sendto(ans.encode(),('127.0.0.1', 12345))
+        socket_client.sendto(ans.encode(),('127.0.0.1', port))
 
         # receive data from the server
         print("Received feedback from server :",socket_client.recv(1024).decode())
@@ -57,9 +59,12 @@ if __name__ == '__main__':
         socket_client.close()
 
     elif args["algorithm"] == 'crc':
-        ans = client_obj.encode_data_parity(data)
+        ans = ''
+        for i in range(len(data)):
+            ans += client_obj.encode_data_crc(data[i])
+
         print("Encoded data to be sent to server in binary format :", ans)
-        socket_client.sendto(ans.encode(),('127.0.0.1', 12345))
+        socket_client.sendto(ans.encode(),('127.0.0.1', port))
 
         # receive data from the server
         print("Received feedback from server :",socket_client.recv(1024).decode())
@@ -67,15 +72,12 @@ if __name__ == '__main__':
         socket_client.close()
 
     elif args["algorithm"] == 'hamming':
-        ans = client_obj.encode_data_hamming(data)
-        print("Encoded data to be sent to server in binary format :", ans)
-        
-        # flipping one bit
-        ans = list(ans)
-        #ans[6] = '1'
-        ans = ''.join(ans)
-
-        socket_client.sendto(ans.encode(),('127.0.0.1', 12345))
+        ans = ''
+        for i in range(len(data)):
+            ans += client_obj.encode_data_hamming(data[i])
+    
+        print("Encoded data to be sent to server in binary format :", ans)        
+        socket_client.sendto(ans.encode(),('127.0.0.1', port))
 
         # receive data from the server
         print("Received feedback from server :",socket_client.recv(1024).decode())

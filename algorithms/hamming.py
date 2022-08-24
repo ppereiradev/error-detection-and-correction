@@ -20,26 +20,10 @@ the number of bits in the input message. Follow the below steps to solve the pro
 class Hamming():
     def __init__(self):
         self.num_parity_bits = 0
-        self.list_parity_bit_positions = []
-    
-    # find the number of parity bits
-    # 2^r ≥ m + r + 1 
-    # where, r = redundant bit, m = data bit
-    def find_number_of_parity_bits(self, data):
-        data_length = len(data)
-        num_of_parity_bits = 1
-        while 2**num_of_parity_bits < data_length + num_of_parity_bits + 1:
-            num_of_parity_bits += 1
-        
-        return num_of_parity_bits
-
-
-    # get a list of parity bit positions, given the number of parity bits
-    def generate_list_parity_bit_positions(self, num_of_parity_bits):
-        result = []
-        for i in range(num_of_parity_bits): 
-            result.append(pow(2, i))
-        return result
+        # find the number of parity bits
+        # 2^r ≥ m + r + 1 
+        # where, r = redundant bit, m = data bit
+        self.list_parity_bit_positions = [1, 2, 4, 8]
 
     # create the bit positions first, set the parity bits to 0
     def create_bit_chain(self, data):
@@ -86,26 +70,22 @@ class Hamming():
         data = [i for i in data if i is not None]
         return "".join(data)
 
-
     # encode 
     def encode_data(self, data):
-        self.num_parity_bits = self.find_number_of_parity_bits(data)
-        self.list_parity_bit_positions = self.generate_list_parity_bit_positions(self.num_parity_bits)
         data = self.create_bit_chain(data)
         return self.set_parity_bits(data)
-
 
     # decode 
     def decode_data(self, data):
         data = data.decode()
         error = self.verify_correctness(data)
         if error == 0:
-            print("No error was detected.")
+            print("\nNo error was detected.")
         else:
-            print("Bit in positions", error, "is flipped!")
+            print("\nBit in positions", error, "is flipped!")
 
         data = self.remove_parity(data)
         message = (chr(int(data, 2)))
-        print("\n[DECODE] Data:", data, "\nMessage:", message)
+        print("[BYTE DECODED] Data:", data, "\nMessage:", message)
         return error
 
