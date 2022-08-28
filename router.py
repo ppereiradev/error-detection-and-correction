@@ -4,7 +4,7 @@ import argparse
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument("-e", "--error", required=True, type=bool, 
+    ap.add_argument("-e", "--error", type=bool, 
         help="The algorithm to detect or correct error (types supported: parity, crc, hamming, reed).")
     args = vars(ap.parse_args())
     print(args)
@@ -49,12 +49,19 @@ if __name__ == '__main__':
 
             # flipping one bit
             if args["error"]:
+                print(args["error"])
                 ans = list(data.decode())
-                
-                if ans[2] == '1':
-                    ans[2] = '0'
+
+                if ans[4] == '1':
+                    ans[4] = '0'
                 else:
-                    ans[2] = '1'
+                    ans[4] = '1'
+                                    
+                if ans[5] == '1':
+                    ans[5] = '0'
+                else:
+                    ans[5] = '1'
+
 
                 data = ''.join(ans).encode()
 

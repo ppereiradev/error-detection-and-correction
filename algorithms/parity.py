@@ -17,10 +17,10 @@ class Parity:
         parity = [int(i) for i in list(data)]
         if sum(parity) % 2 == 0:
             print("Even parity, error detected!")
-            return False
+            return True
         else:
             print("Odd parity, therefore no error detected.")
-            return True
+            return False
 
     def encode_data(self, data):
         parity = [int(i) for i in list(data)]
