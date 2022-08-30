@@ -7,7 +7,7 @@ if __name__ == '__main__':
     ap.add_argument("-e", "--error", type=bool, 
         help="The algorithm to detect or correct error (types supported: parity, crc, hamming, reed).")
     args = vars(ap.parse_args())
-    print(args)
+
     # Creating Socket Server
     socket_server = socket.socket()
     print("Socket server successfully created")
