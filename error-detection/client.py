@@ -15,7 +15,7 @@ class Client:
         return self.parity.encode_data(data)
 
     def encode_data_crc(self, data):
-        key = "1001"
+        key = "1001" 
         return self.crc.encode_data(data, key)
 
     def encode_data_hamming(self, data):

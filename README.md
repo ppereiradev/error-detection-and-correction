@@ -69,11 +69,11 @@ or
 
 Then you run the router, setting if it will cause errors or not.
 ```bash
-(error-detection) $ python router.py -e true
+(error-detection) $ python router.py -e
 ```
 or
 ```bash
-(error-detection) $ python router.py --error false
+(error-detection) $ python router.py --error
 ```
 
 Now you can run the client, but in another terminal window. Remember you have to pass the same algorithm that you passed for the server.
@@ -89,17 +89,17 @@ The algorithm options are: parity, crc, hamming, reed-solomon. Suppose you want 
 
 First terminal window
 ```bash
-(error-detection) $ python server.py --algorithm reed-solomon
+(error-detection) $ python server.py --algorithm parity
 ```
 
 Second terminal window
 ```bash
-(error-detection) $ python router.py --e false
+(error-detection) $ python router.py -e
 ```
 
 Third terminal window
 ```bash
-(error-detection) $ python client.py --algorithm reed-solomon
+(error-detection) $ python client.py --algorithm parity
 ```
 
 ## File Description
