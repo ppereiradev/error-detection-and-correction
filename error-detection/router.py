@@ -4,9 +4,14 @@ import argparse
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument("-e", "--error", type=bool, 
+    ap.add_argument("-e", "--error", action='store_true',
         help="The algorithm to detect or correct error (types supported: parity, crc, hamming, reed).")
     args = vars(ap.parse_args())
+
+    if args["error"]:
+        print("Router with error!")
+    else:
+        print("Router with no error!")
 
     # Creating Socket Server
     socket_server = socket.socket()
@@ -28,6 +33,7 @@ if __name__ == '__main__':
     # case it is 12345 but it can be anything
     port_client = 12346
 
+    socket_client.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     socket_client.bind(('', port_client))
     print("socket client binded to %s" % (port_client))
     # put the socket into listening mode

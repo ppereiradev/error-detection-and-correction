@@ -60,25 +60,25 @@ if __name__ == '__main__':
         help="The algorithm to detect or correct error (types supported: parity, crc, hamming, reed).")
     args = vars(ap.parse_args())
     
-
-    # Creating Socket
-    socket_server = socket.socket()
-    print("Socket successfully created")
-
-    # reserve a port on your computer in our
-    # case it is 12345 but it can be anything
-    port = 12345
-
-    socket_server.bind(('', port))
-    print("socket binded to %s" % (port))
-    # put the socket into listening mode
-    socket_server.listen(5)
-    print("socket is listening")
-
-    client, addr = socket_server.accept()
-    print('Got connection from', addr)
-
     try:
+        # Creating Socket
+        socket_server = socket.socket()
+        print("Socket successfully created")
+
+        # reserve a port on your computer in our
+        # case it is 12345 but it can be anything
+        port = 12345
+        socket_server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        socket_server.bind(('', port))
+        print("socket binded to %s" % (port))
+        # put the socket into listening mode
+        socket_server.listen(5)
+        print("socket is listening")
+
+        client, addr = socket_server.accept()
+        print('Got connection from', addr)
+
+        
         while True:
             # Get data from client
             data = client.recv(1024)
@@ -100,6 +100,5 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt:
         print("\n\nShutdown...")
-        client.close()
 
 
