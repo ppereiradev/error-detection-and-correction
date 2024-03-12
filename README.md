@@ -34,7 +34,7 @@ source venv/bin/activate
 Now you have the virtual environment activated.
 
 ### Windows
-To install Pyton on Windows, you have to download the its installer. Go to the [Python's website](https://www.python.org/downloads/windows/) and choose the proper installer.
+To install Pyton on Windows, you have to download the its installer. Go to the [Python's website](https://www.python.org/downloads/windows/) and choose the proper installer. 
 
 Run the installer, and REMEMBER TO SET THE ADD PYTHON TO PATH OPTION.
 
