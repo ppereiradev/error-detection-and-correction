@@ -13,6 +13,15 @@ class Parity:
         else:
             return "".join(str(i) for i in parity) + " has odd parity"
 
+    def has_even_parity(self, data):
+        parity = [int(i) for i in list(data)]
+        if sum(parity) % 2 != 0:
+            print("Odd parity, error detected!")
+            return True
+        else:
+            print("Even parity, therefore no error detected.")
+            return False
+
     def has_odd_parity(self, data):
         parity = [int(i) for i in list(data)]
         if sum(parity) % 2 == 0:
@@ -28,7 +37,7 @@ class Parity:
             parity.insert(0, '1')
 
         return "".join(str(i) for i in parity)
-            
+
     def decode_data(self, data):
         data = data.decode()
         return self.has_odd_parity(data)
