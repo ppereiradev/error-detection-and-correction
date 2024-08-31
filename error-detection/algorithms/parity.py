@@ -15,29 +15,44 @@ class Parity:
 
     def has_even_parity(self, data):
         parity = [int(i) for i in list(data)]
-        if sum(parity) % 2 != 0:
-            print("Odd parity, error detected!")
+        if sum(parity) % 2 == 0:
+            print("Even parity, therefore no error detected.")
             return True
         else:
-            print("Even parity, therefore no error detected.")
+            print("Odd parity, error detected!")
             return False
 
     def has_odd_parity(self, data):
         parity = [int(i) for i in list(data)]
-        if sum(parity) % 2 == 0:
-            print("Even parity, error detected!")
+        if sum(parity) % 2 != 0:
+            print("Odd parity, therefore no error detected.")
             return True
         else:
-            print("Odd parity, therefore no error detected.")
+            print("Even parity, error detected!")
             return False
 
-    def encode_data(self, data):
+    def encode_even_data(self, data):
         parity = [int(i) for i in list(data)]
         if sum(parity) % 2 == 0:
             parity.insert(0, '1')
+        else:
+            parity.insert(0, '0')
 
         return "".join(str(i) for i in parity)
 
-    def decode_data(self, data):
+    def encode_odd_data(self, data):
+        parity = [int(i) for i in list(data)]
+        if sum(parity) % 2 != 0:
+            parity.insert(0, '1')
+        else:
+            parity.insert(0, '0')
+
+        return "".join(str(i) for i in parity)
+
+    def decode_even_data(self, data):
+        data = data.decode()
+        return self.has_even_parity(data)
+
+    def decode_odd_data(self, data):
         data = data.decode()
         return self.has_odd_parity(data)
