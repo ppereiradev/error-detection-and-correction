@@ -12,27 +12,27 @@ class Client:
         self.hamming = Hamming()
 
     def encode_data_parity(self, data):
-        return self.parity.encode_data(data)
+        return self.parity.encode_odd_data(data)
 
     def encode_data_crc(self, data):
-        key = "1001" 
+        key = "1001"
         return self.crc.encode_data(data, key)
 
     def encode_data_hamming(self, data):
         return self.hamming.encode_data(data)
-        
+
 
 
 if __name__ == '__main__':
-    
+
     # construct the argument parser and parse the arguments
     ap = argparse.ArgumentParser()
-    ap.add_argument("-a", "--algorithm", required=True, type=str, 
+    ap.add_argument("-a", "--algorithm", required=True, type=str,
         help="The algorithm to detect or correct error (types supported: parity, crc, hamming, reed).")
     args = vars(ap.parse_args())
 
     # Create a socket object
-    socket_client = socket.socket()	
+    socket_client = socket.socket()
 
     # Define the port on which you want to connect
     port = 12346
@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
     data = [format(ord(x), 'b') for x in input_string]
     print("Entered data in binary format :", "".join(data))
-    
+
     if args["algorithm"] == 'parity':
         ans = client_obj.encode_data_parity(data)
 
@@ -75,8 +75,8 @@ if __name__ == '__main__':
         ans = ''
         for i in range(len(data)):
             ans += client_obj.encode_data_hamming(data[i])
-    
-        print("Encoded data to be sent to server in binary format :", ans)        
+
+        print("Encoded data to be sent to server in binary format :", ans)
         socket_client.sendto(ans.encode(),('127.0.0.1', port))
 
         # receive data from the server
